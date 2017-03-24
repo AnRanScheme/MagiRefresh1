@@ -16,15 +16,10 @@ import UIKit
 /// - releaseToFresh: 松开手即进入刷新状态
 /// - noMoreData: 没有数据
 public enum MagiRefreshState{
-
     case loading
-
     case normal
-
     case pullToRefresh
-   
     case releaseToFresh
-    
     case noMoreData
 }
 
@@ -80,8 +75,8 @@ extension MagiRefreshComponentDelegate {
     
     
     /// optional 两个可选方法的实现
-    public func refreshComponentDidPrepare(_ refreshComponent: MagiRefreshComponent, refreshType: MagiRefreshComponentType) { }
-    public func refreshDidChangeProgress(_ refreshComponent: MagiRefreshComponent, progress: CGFloat, refreshViewType: MagiRefreshComponentType) { }
+    public func refreshComponentDidPrepare(_ refreshComponent: MagiRefreshComponent, refreshComponentType: MagiRefreshComponentType) { }
+    public func refreshDidChangeProgress(_ refreshComponent: MagiRefreshComponent, progress: CGFloat, refreshComponentType: MagiRefreshComponentType) { }
 }
 
 open class MagiRefreshComponent: UIView {
