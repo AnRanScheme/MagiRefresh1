@@ -6,24 +6,24 @@
   Copyright © 2017年 安然. All rights reserved.
 */
 
-pullDownToRefresh = "Pull to refresh"
+pullDownToRefresh = "Pull to refresh";
 
-releaseToRefresh = "Release to refresh"
+releaseToRefresh = "Release to refresh";
 
-refreshSuccess = "Update successful"
+refreshSuccess = "Update successful";
 
-refreshFailure = "Update failed"
+refreshFailure = "Update failed";
 
-refreshing = "Refreshing..."
+refreshing = "Refreshing...";
 
-pullUpToRefresh = "Scroll to load"
+pullUpToRefresh = "Scroll to load";
 
-noMoreData = "No more data, daling!"
+noMoreData = "No more data, daling!";
 
-tapToRefresh = "Tap to refresh"
+tapToRefresh = "Tap to refresh";
 
-scrollAndTapToRefresh = "Scroll or tap to load"
+scrollAndTapToRefresh = "Scroll or tap to load";
 
-loadMore = "Loadding..."
+loadMore = "Loadding...";
 
-releaseLoadMore = "Release to load more"
+releaseLoadMore = "Release to load more";
