@@ -1,0 +1,2 @@
+# MagiRefresh
+Swift版MJRefresh,但是肯定不是一样的思路都应该一样,另外我使用了runtime,也就是Swift的外衣下面也用了OC如果以后有解决办法,之后肯定会更新的
