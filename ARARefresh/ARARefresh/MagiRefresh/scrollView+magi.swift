@@ -42,7 +42,7 @@ extension UIScrollView {
      - parameter headerAnimator: 下拉刷新控件 -- 继承自UIView同时遵守RefreshViewDelegate
      - parameter refreshHandler: 处理刷新过程的闭包
      */
-    public func zj_addRefreshHeader<Animator>(headerAnimator: Animator, refreshHandler: @escaping RefreshHandler ) where Animator: UIView, Animator: MagiRefreshComponentDelegate {
+    public func m_addRefreshHeader<Animator>(headerAnimator: Animator, refreshHandler: @escaping RefreshHandler ) where Animator: UIView, Animator: MagiRefreshComponentDelegate {
         
         if let header = m_refreshHeader {
             header.removeFromSuperview()
@@ -60,7 +60,7 @@ extension UIScrollView {
      - parameter footerAnimator: 上拉刷新控件 -- 继承自UIView同时遵守RefreshViewDelegate
      - parameter refreshHandler: 处理刷新过程的闭包
      */
-    public func zj_addRefreshFooter<Animator>(footerAnimator: Animator, refreshHandler: @escaping RefreshHandler ) where Animator: UIView, Animator: MagiRefreshComponentDelegate {
+    public func m_addRefreshFooter<Animator>(footerAnimator: Animator, refreshHandler: @escaping RefreshHandler ) where Animator: UIView, Animator: MagiRefreshComponentDelegate {
         if let footer = m_refreshFooter {
             footer.removeFromSuperview()
         }
@@ -74,19 +74,19 @@ extension UIScrollView {
     }
     
     /// 开启header刷新
-    public func zj_startHeaderAnimation() {
+    public func m_startHeaderAnimation() {
         m_refreshHeader?.canBegin = true
     }
     /// 结束header刷新
-    public func zj_stopHeaderAnimation() {
+    public func m_stopHeaderAnimation() {
         m_refreshHeader?.canBegin = false
     }
     /// 开启footer刷新
-    public func zj_startFooterAnimation() {
+    public func m_startFooterAnimation() {
         m_refreshFooter?.canBegin = true
     }
     /// 结束footer刷新
-    public func zj_stopFooterAnimation() {
+    public func m_stopFooterAnimation() {
         m_refreshFooter?.canBegin = false
     }
     

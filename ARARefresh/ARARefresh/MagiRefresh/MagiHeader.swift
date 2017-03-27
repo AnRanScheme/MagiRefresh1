@@ -12,7 +12,7 @@ class MagiHeader: UIView {
 
     lazy var imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "arrow_down")
+        iv.image = UIImage(named: "grayArrow")
         iv.m_size = CGSize(width: 36, height: 36)
         return iv
     }()
@@ -21,6 +21,7 @@ class MagiHeader: UIView {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = false
         indicator.isHidden = false
+        indicator.color = UIColor.gray
         indicator.sizeToFit()
         indicator.m_size = CGSize(width: 40, height: 40)
         return indicator

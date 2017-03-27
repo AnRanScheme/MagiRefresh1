@@ -18,6 +18,8 @@ class ARANomalViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ARANomalViewController.cellID)
 
         tableView.tableFooterView = UIView()
         
@@ -63,13 +65,16 @@ class ARANomalViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ARANomalViewController.cellID, for: indexPath)
-cell.textLabel?.text
-        
-
+        cell.textLabel?.text = "测试数据-----\(data[indexPath.row])"
         return cell
     }
  
     func example1() {
+        let header = MagiHeader()
+        header.lastRefreshTimeKey = "dsadsa"
+        let footer = MagiHeader()
+        footer.lastRefreshTimeKey = "asdas"
+        addHeader(header: header, footer: footer)
     }
     
     func example2() {
@@ -88,6 +93,42 @@ cell.textLabel?.text
     }
     
     func example7() {
+    }
+    
+    func addHeader<Animator: UIView>(header: Animator, footer: Animator) where Animator: MagiRefreshComponentDelegate{
+        tableView.m_addRefreshHeader(headerAnimator: header) { [weak self] in
+            DispatchQueue.global().async {
+                for i in 0...50000 {
+                    if i <= 10 {
+                        self?.data.append(i)
+                    }
+                    /// 延时
+                    print("加载数据中")
+                }
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    /// 刷新完毕, 停止动画
+                    self?.tableView.m_stopHeaderAnimation()
+                }
+            }
+        }
+        
+        tableView.m_addRefreshFooter(footerAnimator: footer) { [weak self] in
+            DispatchQueue.global().async {
+                for i in 0...50000 {
+                    if i <= 10 {
+                        self?.data.append(i)
+                        
+                    }
+                    /// 延时
+                    print("加载数据中")
+                }
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.tableView.m_stopFooterAnimation()
+                }
+            }
+        }
     }
 
     

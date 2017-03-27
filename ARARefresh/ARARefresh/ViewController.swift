@@ -71,7 +71,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return "header"
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ARANomalViewController()
         vc.row = indexPath.row
         show(vc, sender: nil)

@@ -110,19 +110,19 @@ open class MagiRefreshComponent: UIView {
     }
     
     // MARK: - private property
-    fileprivate var magiRefreshState: MagiRefreshState = .normal {
+    fileprivate var refreshState: MagiRefreshState = .normal {
         didSet {
-            if magiRefreshState == .normal {
-                //isHidden = refreshAnimator.isAutomaticlyHidden
+            if refreshState == .normal {
+                isHidden = refreshAnimator.isAutomaticlyHidden
             } else {
                 isHidden = false
             }
             
-            if magiRefreshState != oldValue {
-                if magiRefreshState == .loading {
-                    // refreshAnimator.lastRefreshTime = Date()
+            if refreshState != oldValue {
+                if refreshState == .loading {
+                     refreshAnimator.lastRefreshTime = Date()
                 } else {
-                    // refreshAnimator.refreshDidChangeState(self, fromState: oldValue, toState: refreshViewState, refreshViewType: refreshViewType)
+                     refreshAnimator.refreshDidChangeState(self, fromState: oldValue, toState: refreshState, refreshComponentType: refreshComponentType)
                 }
             }
         }
@@ -197,7 +197,7 @@ open class MagiRefreshComponent: UIView {
             ///  can drag anytime 开启始终支持bounces
             newScrollView.alwaysBounceVertical = true
             // 添加kvo监听者
-            // addObserverOf(newScrollView)
+            addObserverOf(newScrollView)
             // 记录scrollView初始的状态, 便于在执行完成之后恢复
             scrollViewOriginalValue = (newScrollView.bounces,
                                        newScrollView.contentInset.top,
@@ -244,7 +244,7 @@ extension MagiRefreshComponent {
                 /// 这个时候才正式刷新
                 validScrollView.bounces = true
                 validSelf.isGestureBegin = false
-                validSelf.magiRefreshState = .loading
+                validSelf.refreshState = .loading
                 validSelf.refreshAnimator.refreshDidBegin(validSelf,refreshComponentType: validSelf.refreshComponentType)
                 validSelf.refreshHandler()
             })
@@ -283,7 +283,7 @@ extension MagiRefreshComponent {
                                                                    refreshComponentType: validSelf.refreshComponentType)
                 validSelf.refreshAnimator.refreshDidEnd(validSelf,
                                                         refreshComponentType: validSelf.refreshComponentType)
-                validSelf.magiRefreshState = .normal
+                validSelf.refreshState = .normal
                 validSelf.isHidden = validSelf.refreshAnimator.isAutomaticlyHidden
             })
         }
@@ -415,21 +415,21 @@ extension MagiRefreshComponent {
         if scrollView.isTracking {
             
             if progress >= 1.0 {
-                magiRefreshState = .releaseToFresh
+                refreshState = .releaseToFresh
                 
             } else if progress <= 0.0 {
-                magiRefreshState = .normal
+                refreshState = .normal
             } else {
-                magiRefreshState = .pullToRefresh
+                refreshState = .pullToRefresh
             }
             
         }
-        else if magiRefreshState == .releaseToFresh {// releaseToFreah 2 refresh
+        else if refreshState == .releaseToFresh {// releaseToFreah 2 refresh
             canBegin = true// begin refresh
         }
         else {// release
             if progress <= 0.0 {
-                magiRefreshState = .normal
+                refreshState = .normal
             }
             
         }
