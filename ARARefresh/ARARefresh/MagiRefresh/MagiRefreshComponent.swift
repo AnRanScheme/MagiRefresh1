@@ -79,8 +79,11 @@ extension MagiRefreshComponentDelegate {
     
     
     /// optional 两个可选方法的实现
-    public func refreshComponentDidPrepare(_ refreshComponent: MagiRefreshComponent, refreshComponentType: MagiRefreshComponentType) { }
-    public func refreshDidChangeProgress(_ refreshComponent: MagiRefreshComponent, progress: CGFloat, refreshComponentType: MagiRefreshComponentType) { }
+    public func refreshComponentDidPrepare(_ refreshComponent: MagiRefreshComponent,
+                                           refreshComponentType: MagiRefreshComponentType) { }
+    public func refreshDidChangeProgress(_ refreshComponent: MagiRefreshComponent,
+                                         progress: CGFloat,
+                                         refreshComponentType: MagiRefreshComponentType) { }
 }
 
 open class MagiRefreshComponent: UIView {
@@ -306,7 +309,7 @@ extension MagiRefreshComponent {
                     let newSize = (change?[.newKey] as AnyObject).cgSizeValue,
                     (oldSize != newSize) && (refreshComponentType == .footer)
                     else { return }
-                
+                print("-------\(heightOfContentOnScreenOfScrollView(validScrollView))")
                 /// 设置刷新控件self的位置
                 let contentOnScreenHeight = heightOfContentOnScreenOfScrollView(validScrollView)
                 /// 添加在scrollView"外面"
@@ -314,9 +317,7 @@ extension MagiRefreshComponent {
                 self.frame.origin.y = max(newSize.height, contentOnScreenHeight)
                 //                print("old--*\(oldSize.height)--------*\(newSize.height)")
                 
-            }
-            else if keyPath == ConstantValue.ScrollViewContentOffsetPath {
-                
+            } else if keyPath == ConstantValue.ScrollViewContentOffsetPath {
                 if let validScrollView = scrollView, object as? UIScrollView == validScrollView {
                     //                    print(validScrollView.contentInset.top);
                     if refreshComponentType == .header {
@@ -333,11 +334,6 @@ extension MagiRefreshComponent {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-/*
-    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutableRawPointer) {
-     
-    }
-*/
     
     fileprivate func adjustFooterWhenScrollViewIsScrolling(scrollView: UIScrollView) {
         
@@ -416,25 +412,21 @@ extension MagiRefreshComponent {
         //        print(progress)
         
         if scrollView.isTracking {
-            
             if progress >= 1.0 {
                 refreshState = .releaseToFresh
-                
             } else if progress <= 0.0 {
                 refreshState = .normal
             } else {
                 refreshState = .pullToRefresh
             }
-            
-        }
-        else if refreshState == .releaseToFresh {// releaseToFreah 2 refresh
-            canBegin = true// begin refresh
-        }
-        else {// release
+        } else if refreshState == .releaseToFresh {
+            // releaseToFreah 2 refresh
+            canBegin = true
+            // begin refresh
+        } else {// release
             if progress <= 0.0 {
                 refreshState = .normal
             }
-            
         }
         
         var actualProgress = min(1.0, progress)

@@ -12,7 +12,7 @@ class ARANomalViewController: UITableViewController {
     
     static let cellID = "cellID"
     
-    var data: [Int] = [1,2,3,4]
+    var data: [Int] = [1,2,3,4,5,6,7,8,9,0,11,22,33,44,55,66,77]
     
     var row: Int?
 
@@ -103,14 +103,13 @@ class ARANomalViewController: UITableViewController {
                     if i <= 10 {
                         self?.data.append(i)
                     }
-                    /// 延时
-                    print("加载数据中")
+                    //print("加载数据中")
                 }
-                DispatchQueue.main.async {
+                self?.Delay(3, completion: {
                     self?.tableView.reloadData()
                     /// 刷新完毕, 停止动画
                     self?.tableView.m_stopHeaderAnimation()
-                }
+                })
             }
         }
         
@@ -129,6 +128,16 @@ class ARANomalViewController: UITableViewController {
                     self?.tableView.m_stopFooterAnimation()
                 }
             }
+        }
+    }
+    
+    ///
+    /// 延迟执行
+    ///
+    func Delay(_ seconds: Double, completion:@escaping ()->()) {
+        let popTime = DispatchTime.now() + Double(Int64( Double(NSEC_PER_SEC) * seconds )) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: popTime) {
+            completion()
         }
     }
 

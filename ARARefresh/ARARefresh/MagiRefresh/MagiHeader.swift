@@ -83,7 +83,7 @@ class MagiHeader: UIView {
         addSubview(descriptionLabel)
         addSubview(lastTimeLabel)
         addConstraint()
-        backgroundColor = UIColor.red
+        backgroundColor = UIColor.clear
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -93,20 +93,20 @@ class MagiHeader: UIView {
     private func addConstraint() {
         
         if lastTimeLabel.isHidden {
-            let descriptionLabelCenterX  = NSLayoutConstraint(item: descriptionLabel,
-                                                              attribute: .centerX,
-                                                              relatedBy: .equal,
-                                                              toItem: self,
-                                                              attribute: .centerX,
-                                                              multiplier: 1.0,
-                                                              constant: 0)
+            let descriptionLabelCenterX = NSLayoutConstraint(item: descriptionLabel,
+                                                             attribute: .centerX,
+                                                             relatedBy: .equal,
+                                                             toItem: self,
+                                                             attribute: .centerX,
+                                                             multiplier: 1.0,
+                                                             constant: 0)
             let descriptionLabelCenterY = NSLayoutConstraint(item: descriptionLabel,
-                                                         attribute: .top,
-                                                         relatedBy: .equal,
-                                                         toItem: self,
-                                                         attribute: .centerY,
-                                                         multiplier: 1.0,
-                                                         constant: 0)
+                                                             attribute: .top,
+                                                             relatedBy: .equal,
+                                                             toItem: self,
+                                                             attribute: .centerY,
+                                                             multiplier: 1.0,
+                                                             constant: 0)
             descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             addConstraints([descriptionLabelCenterX, descriptionLabelCenterY])
             
@@ -116,7 +116,7 @@ class MagiHeader: UIView {
                                                        toItem: self,
                                                        attribute: .centerX,
                                                        multiplier: 1.0,
-                                                       constant: -15.0 - descriptionLabel.m_width / 2.0 - imageView.m_width / 2.0)
+                                                       constant: -15.0 )
             let imageViewCenterY = NSLayoutConstraint(item: imageView,
                                                       attribute: .centerY,
                                                       relatedBy: .equal,
@@ -219,28 +219,6 @@ class MagiHeader: UIView {
             indicatorView.translatesAutoresizingMaskIntoConstraints = false
             addConstraints([indicatorViewCenterX, indicatorViewCenterY])
         }
-  }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-//        if !descriptionLabel.isHidden {
-//            if lastTimeLabel.isHidden {
-//                descriptionLabel.sizeToFit()
-//                descriptionLabel.center = center
-//            } else {
-//                descriptionLabel.sizeToFit()
-//                lastTimeLabel.sizeToFit()
-//                indicatorView.sizeToFit()
-//                descriptionLabel.m_y = bounds.height / 2 - descriptionLabel.bounds.height
-//                lastTimeLabel.m_y = descriptionLabel.frame.maxY + 8.0
-//                descriptionLabel.center.x = center.x
-//                lastTimeLabel.center.x = center.x
-//                indicatorView.m_x = lastTimeLabel.frame.minX - 8.0 - indicatorView.m_width
-//                imageView.m_x = lastTimeLabel.frame.minX - 8.0 - imageView.m_width
-//                indicatorView.center.y = bounds.height / 2
-//                imageView.center = indicatorView.center
-//            }
-//        }
     }
     
 }
