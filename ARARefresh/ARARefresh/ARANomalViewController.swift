@@ -79,9 +79,49 @@ class ARANomalViewController: UITableViewController {
     }
     
     func example2() {
+        let normalHeader = MagiHeader()
+        normalHeader.lastRefreshTimeKey = "exampleHeader2"
+        normalHeader.lastTimeLabel.isHidden = true
+        
+        let normalFooter = MagiHeader()
+        normalFooter.lastRefreshTimeKey = "exampleFooter2"
+        
+        addHeader(header: normalHeader, footer: normalFooter)
     }
     
     func example3() {
+        let normalHeader = MagiHeader()
+        normalHeader.lastRefreshTimeKey = "exampleHeader3"
+        
+        /// 自定义提示文字
+
+        normalHeader.setupDescriptionForState { (refreshState, refreshType) -> String in
+            switch refreshState {
+            case .loading:
+                return "努力加载中"
+            case .normal:
+                return "休息中"
+            case .pullToRefresh:
+                if refreshType == .header {
+                    return "继续下下下下"
+                } else {
+                    return "继续上上上上"
+                }
+            case .releaseToFresh:
+                return "放开我"
+            default:
+                return ""
+            }
+        }
+
+        /// 自定义时间显示
+        //        normalHeader.setupLastFreshTime { (date) -> String in
+        //            return ...
+        //        }
+        let normalFooter = MagiHeader()
+        normalFooter.lastRefreshTimeKey = "exampleFooter3"
+        addHeader(header: normalHeader, footer: normalFooter)
+
     }
     
     func example4() {

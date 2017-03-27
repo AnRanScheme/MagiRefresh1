@@ -52,12 +52,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             text = "使用正常状态且隐藏的header的显示时间"
         case 2:
             text = "使用正常状态且自定义文字提示和时间显示"
+        /*
         case 3:
             text = "使用gif图片且不自定义"
         case 4:
             text = "使用gif图片且隐藏文字提示"
         case 5:
             text = "使用gif图片且自定义文字提示"
+        */
         default:
             text = "分离开自定义的设置"
         }
