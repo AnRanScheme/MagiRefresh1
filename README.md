@@ -29,6 +29,7 @@ Swift版MJRefresh,但是肯定不是一样的思路都应该一样,另外我使�
             }
         }
         
+        
         tableView.m_addRefreshFooter(footerAnimator: footer) { [weak self] in
             DispatchQueue.global().async {
                 for i in 0...50000 {
