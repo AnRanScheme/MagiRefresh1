@@ -12,8 +12,8 @@ class MagiHeader: UIView {
 
     lazy var imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "grayArrow")
-        iv.m_size = CGSize(width: 36, height: 36)
+        iv.image = UIImage(named: "arrow_down")
+        iv.m_size = CGSize(width: 14, height: 14)
         return iv
     }()
     
@@ -76,39 +76,117 @@ class MagiHeader: UIView {
     }
     
     override init(frame: CGRect) {
-        let frame1 = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)
+        let frame1 = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 64)
         super.init(frame: frame1)
         addSubview(imageView)
         addSubview(indicatorView)
         addSubview(descriptionLabel)
         addSubview(lastTimeLabel)
-        backgroundColor = UIColor.clear
+        addConstraint()
+        backgroundColor = UIColor.red
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func addConstraint() {
+        let descriptionLabelCenterX  = NSLayoutConstraint(item: descriptionLabel,
+                                                   attribute: .centerX,
+                                                   relatedBy: .equal,
+                                                   toItem: self,
+                                                   attribute: .centerX,
+                                                   multiplier: 1.0,
+                                                    constant: 0)
+        let descriptionLabelTop = NSLayoutConstraint(item: descriptionLabel,
+                                                     attribute: .top,
+                                                     relatedBy: .equal,
+                                                     toItem: self,
+                                                     attribute: .top,
+                                                     multiplier: 1.0,
+                                                     constant: 5)
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        addConstraints([descriptionLabelCenterX, descriptionLabelTop])
+        
+        let lastTimeLabelCenterX = NSLayoutConstraint(item: lastTimeLabel,
+                                                      attribute: .centerX,
+                                                      relatedBy: .equal,
+                                                      toItem: self,
+                                                      attribute: .centerX,
+                                                      multiplier: 1.0,
+                                                      constant: 0)
+        let lastTimeLabelTop = NSLayoutConstraint(item: lastTimeLabel,
+                                                  attribute: .top,
+                                                  relatedBy: .equal,
+                                                  toItem: descriptionLabel,
+                                                  attribute: .bottom,
+                                                  multiplier: 1.0,
+                                                  constant: 5)
+        let lastTimeLabelBottom = NSLayoutConstraint(item: lastTimeLabel,
+                                                  attribute: .bottom,
+                                                  relatedBy: .equal,
+                                                  toItem: self,
+                                                  attribute: .bottom,
+                                                  multiplier: 1.0,
+                                                  constant: -5)
+        lastTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        addConstraints([lastTimeLabelCenterX, lastTimeLabelTop, lastTimeLabelBottom])
+        
+        let imageViewTrailing = NSLayoutConstraint(item: imageView,
+                                                   attribute: .centerX,
+                                                   relatedBy: .equal,
+                                                   toItem: self,
+                                                   attribute: .centerX,
+                                                   multiplier: 1.0,
+                                                   constant: -15.0 - lastTimeLabel.m_width / 2.0 - imageView.m_width / 2.0)
+        let imageViewCenterY = NSLayoutConstraint(item: imageView,
+                                                  attribute: .centerY,
+                                                  relatedBy: .equal,
+                                                  toItem: self,
+                                                  attribute: .centerY,
+                                                  multiplier: 1.0,
+                                                  constant: 0)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        addConstraints([imageViewTrailing, imageViewCenterY])
+        
+        let indicatorViewCenterX = NSLayoutConstraint(item: indicatorView,
+                                                      attribute: .centerX,
+                                                      relatedBy: .equal,
+                                                      toItem: imageView,
+                                                      attribute: .centerX,
+                                                      multiplier: 1.0,
+                                                      constant: 0)
+        let indicatorViewCenterY = NSLayoutConstraint(item: indicatorView,
+                                                      attribute: .centerY,
+                                                      relatedBy: .equal,
+                                                      toItem: imageView,
+                                                      attribute: .centerY,
+                                                      multiplier: 1.0,
+                                                      constant: 0)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        addConstraints([indicatorViewCenterX, indicatorViewCenterY])
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        if !descriptionLabel.isHidden {
-            if lastTimeLabel.isHidden {
-                descriptionLabel.sizeToFit()
-                descriptionLabel.center = center
-            } else {
-                descriptionLabel.sizeToFit()
-                lastTimeLabel.sizeToFit()
-                indicatorView.sizeToFit()
-                descriptionLabel.m_y = bounds.height / 2 - descriptionLabel.bounds.height
-                lastTimeLabel.m_y = descriptionLabel.frame.maxY + 8.0
-                descriptionLabel.center.x = center.x
-                lastTimeLabel.center.x = center.x
-                indicatorView.m_x = lastTimeLabel.frame.minX - 8.0 - indicatorView.m_width
-                imageView.m_x = lastTimeLabel.frame.minX - 8.0 - imageView.m_width
-                indicatorView.center.y = bounds.height / 2
-                imageView.center = indicatorView.center
-            }
-        }
+//        if !descriptionLabel.isHidden {
+//            if lastTimeLabel.isHidden {
+//                descriptionLabel.sizeToFit()
+//                descriptionLabel.center = center
+//            } else {
+//                descriptionLabel.sizeToFit()
+//                lastTimeLabel.sizeToFit()
+//                indicatorView.sizeToFit()
+//                descriptionLabel.m_y = bounds.height / 2 - descriptionLabel.bounds.height
+//                lastTimeLabel.m_y = descriptionLabel.frame.maxY + 8.0
+//                descriptionLabel.center.x = center.x
+//                lastTimeLabel.center.x = center.x
+//                indicatorView.m_x = lastTimeLabel.frame.minX - 8.0 - indicatorView.m_width
+//                imageView.m_x = lastTimeLabel.frame.minX - 8.0 - imageView.m_width
+//                indicatorView.center.y = bounds.height / 2
+//                imageView.center = indicatorView.center
+//            }
+//        }
     }
     
 }
