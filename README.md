@@ -4,7 +4,7 @@ Swift版MJRefresh,但是肯定不是一样的思路都应该一样,另外我使�
 1. 首先现在,这个知识基础版本,后面还会继续完善,对于重写这个控件,主要是为了练习Swift中的runTime的使用与一些分装的思路,同时可以保持代码的一致性
 
 - 默认的样式
-![这是列子](https://github.com/AnRanScheme/ARARefresh/raw/master/picture.gif)
+![这是列子](https://github.com/AnRanScheme/ARARefresh/raw/master/picture1.gif)
 
         let header = MagiHeader()
         header.lastRefreshTimeKey = "dsadsa"
@@ -14,7 +14,7 @@ Swift版MJRefresh,但是肯定不是一样的思路都应该一样,另外我使�
        
 
 - 自定义样式
-![这是列子](https://github.com/AnRanScheme/ARARefresh/raw/master/picture1.gif)
+![这是列子](https://github.com/AnRanScheme/ARARefresh/raw/master/picture2.gif)
         let normalHeader = MagiHeader()
         normalHeader.lastRefreshTimeKey = "exampleHeader3"
         
