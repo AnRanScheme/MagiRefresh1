@@ -91,81 +91,135 @@ class MagiHeader: UIView {
     }
     
     private func addConstraint() {
-        let descriptionLabelCenterX  = NSLayoutConstraint(item: descriptionLabel,
-                                                   attribute: .centerX,
-                                                   relatedBy: .equal,
-                                                   toItem: self,
-                                                   attribute: .centerX,
-                                                   multiplier: 1.0,
-                                                    constant: 0)
-        let descriptionLabelTop = NSLayoutConstraint(item: descriptionLabel,
-                                                     attribute: .top,
-                                                     relatedBy: .equal,
-                                                     toItem: self,
-                                                     attribute: .top,
-                                                     multiplier: 1.0,
-                                                     constant: 5)
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        addConstraints([descriptionLabelCenterX, descriptionLabelTop])
         
-        let lastTimeLabelCenterX = NSLayoutConstraint(item: lastTimeLabel,
-                                                      attribute: .centerX,
+        if lastTimeLabel.isHidden {
+            let descriptionLabelCenterX  = NSLayoutConstraint(item: descriptionLabel,
+                                                              attribute: .centerX,
+                                                              relatedBy: .equal,
+                                                              toItem: self,
+                                                              attribute: .centerX,
+                                                              multiplier: 1.0,
+                                                              constant: 0)
+            let descriptionLabelCenterY = NSLayoutConstraint(item: descriptionLabel,
+                                                         attribute: .top,
+                                                         relatedBy: .equal,
+                                                         toItem: self,
+                                                         attribute: .centerY,
+                                                         multiplier: 1.0,
+                                                         constant: 0)
+            descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+            addConstraints([descriptionLabelCenterX, descriptionLabelCenterY])
+            
+            let imageViewTrailing = NSLayoutConstraint(item: imageView,
+                                                       attribute: .centerX,
+                                                       relatedBy: .equal,
+                                                       toItem: self,
+                                                       attribute: .centerX,
+                                                       multiplier: 1.0,
+                                                       constant: -15.0 - descriptionLabel.m_width / 2.0 - imageView.m_width / 2.0)
+            let imageViewCenterY = NSLayoutConstraint(item: imageView,
+                                                      attribute: .centerY,
                                                       relatedBy: .equal,
                                                       toItem: self,
-                                                      attribute: .centerX,
-                                                      multiplier: 1.0,
-                                                      constant: 0)
-        let lastTimeLabelTop = NSLayoutConstraint(item: lastTimeLabel,
-                                                  attribute: .top,
-                                                  relatedBy: .equal,
-                                                  toItem: descriptionLabel,
-                                                  attribute: .bottom,
-                                                  multiplier: 1.0,
-                                                  constant: 5)
-        let lastTimeLabelBottom = NSLayoutConstraint(item: lastTimeLabel,
-                                                  attribute: .bottom,
-                                                  relatedBy: .equal,
-                                                  toItem: self,
-                                                  attribute: .bottom,
-                                                  multiplier: 1.0,
-                                                  constant: -5)
-        lastTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        addConstraints([lastTimeLabelCenterX, lastTimeLabelTop, lastTimeLabelBottom])
-        
-        let imageViewTrailing = NSLayoutConstraint(item: imageView,
-                                                   attribute: .centerX,
-                                                   relatedBy: .equal,
-                                                   toItem: self,
-                                                   attribute: .centerX,
-                                                   multiplier: 1.0,
-                                                   constant: -15.0 - lastTimeLabel.m_width / 2.0 - imageView.m_width / 2.0)
-        let imageViewCenterY = NSLayoutConstraint(item: imageView,
-                                                  attribute: .centerY,
-                                                  relatedBy: .equal,
-                                                  toItem: self,
-                                                  attribute: .centerY,
-                                                  multiplier: 1.0,
-                                                  constant: 0)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        addConstraints([imageViewTrailing, imageViewCenterY])
-        
-        let indicatorViewCenterX = NSLayoutConstraint(item: indicatorView,
-                                                      attribute: .centerX,
-                                                      relatedBy: .equal,
-                                                      toItem: imageView,
-                                                      attribute: .centerX,
-                                                      multiplier: 1.0,
-                                                      constant: 0)
-        let indicatorViewCenterY = NSLayoutConstraint(item: indicatorView,
-                                                      attribute: .centerY,
-                                                      relatedBy: .equal,
-                                                      toItem: imageView,
                                                       attribute: .centerY,
                                                       multiplier: 1.0,
                                                       constant: 0)
-        indicatorView.translatesAutoresizingMaskIntoConstraints = false
-        addConstraints([indicatorViewCenterX, indicatorViewCenterY])
-    }
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            addConstraints([imageViewTrailing, imageViewCenterY])
+            
+            let indicatorViewCenterX = NSLayoutConstraint(item: indicatorView,
+                                                          attribute: .centerX,
+                                                          relatedBy: .equal,
+                                                          toItem: imageView,
+                                                          attribute: .centerX,
+                                                          multiplier: 1.0,
+                                                          constant: 0)
+            let indicatorViewCenterY = NSLayoutConstraint(item: indicatorView,
+                                                          attribute: .centerY,
+                                                          relatedBy: .equal,
+                                                          toItem: imageView,
+                                                          attribute: .centerY,
+                                                          multiplier: 1.0,
+                                                          constant: 0)
+            indicatorView.translatesAutoresizingMaskIntoConstraints = false
+            addConstraints([indicatorViewCenterX, indicatorViewCenterY])
+        } else {
+            let descriptionLabelCenterX  = NSLayoutConstraint(item: descriptionLabel,
+                                                              attribute: .centerX,
+                                                              relatedBy: .equal,
+                                                              toItem: self,
+                                                              attribute: .centerX,
+                                                              multiplier: 1.0,
+                                                              constant: 0)
+            let descriptionLabelTop = NSLayoutConstraint(item: descriptionLabel,
+                                                         attribute: .top,
+                                                         relatedBy: .equal,
+                                                         toItem: self,
+                                                         attribute: .top,
+                                                         multiplier: 1.0,
+                                                         constant: 5)
+            descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+            addConstraints([descriptionLabelCenterX, descriptionLabelTop])
+            
+            let lastTimeLabelCenterX = NSLayoutConstraint(item: lastTimeLabel,
+                                                          attribute: .centerX,
+                                                          relatedBy: .equal,
+                                                          toItem: self,
+                                                          attribute: .centerX,
+                                                          multiplier: 1.0,
+                                                          constant: 0)
+            let lastTimeLabelTop = NSLayoutConstraint(item: lastTimeLabel,
+                                                      attribute: .top,
+                                                      relatedBy: .equal,
+                                                      toItem: descriptionLabel,
+                                                      attribute: .bottom,
+                                                      multiplier: 1.0,
+                                                      constant: 5)
+            let lastTimeLabelBottom = NSLayoutConstraint(item: lastTimeLabel,
+                                                         attribute: .bottom,
+                                                         relatedBy: .equal,
+                                                         toItem: self,
+                                                         attribute: .bottom,
+                                                         multiplier: 1.0,
+                                                         constant: -5)
+            lastTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+            addConstraints([lastTimeLabelCenterX, lastTimeLabelTop, lastTimeLabelBottom])
+            
+            let imageViewTrailing = NSLayoutConstraint(item: imageView,
+                                                       attribute: .centerX,
+                                                       relatedBy: .equal,
+                                                       toItem: self,
+                                                       attribute: .centerX,
+                                                       multiplier: 1.0,
+                                                       constant: -15.0 - lastTimeLabel.m_width / 2.0 - imageView.m_width / 2.0)
+            let imageViewCenterY = NSLayoutConstraint(item: imageView,
+                                                      attribute: .centerY,
+                                                      relatedBy: .equal,
+                                                      toItem: self,
+                                                      attribute: .centerY,
+                                                      multiplier: 1.0,
+                                                      constant: 0)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            addConstraints([imageViewTrailing, imageViewCenterY])
+            
+            let indicatorViewCenterX = NSLayoutConstraint(item: indicatorView,
+                                                          attribute: .centerX,
+                                                          relatedBy: .equal,
+                                                          toItem: imageView,
+                                                          attribute: .centerX,
+                                                          multiplier: 1.0,
+                                                          constant: 0)
+            let indicatorViewCenterY = NSLayoutConstraint(item: indicatorView,
+                                                          attribute: .centerY,
+                                                          relatedBy: .equal,
+                                                          toItem: imageView,
+                                                          attribute: .centerY,
+                                                          multiplier: 1.0,
+                                                          constant: 0)
+            indicatorView.translatesAutoresizingMaskIntoConstraints = false
+            addConstraints([indicatorViewCenterX, indicatorViewCenterY])
+        }
+  }
     
     override func layoutSubviews() {
         super.layoutSubviews()
