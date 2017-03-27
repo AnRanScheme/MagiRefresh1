@@ -18,6 +18,7 @@
 		352B23B31E84B88F006EB6B1 /* success@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 352B23B01E84B88F006EB6B1 /* success@3x.png */; };
 		352B23B91E84BBF8006EB6B1 /* MagiRefreshExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352B23B81E84BBF8006EB6B1 /* MagiRefreshExtension.swift */; };
 		352B23BB1E84BDD8006EB6B1 /* MagiRefreshConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352B23BA1E84BDD8006EB6B1 /* MagiRefreshConstant.swift */; };
+		357C9AFC1E88A95C003CC62B /* scrollView+magi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C9AFB1E88A95C003CC62B /* scrollView+magi.swift */; };
 		35ECD9171E84C9B0009E4D9C /* MagiHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ECD9161E84C9B0009E4D9C /* MagiHeader.swift */; };
 		35ECD9191E84C9DD009E4D9C /* MagiFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ECD9181E84C9DD009E4D9C /* MagiFooter.swift */; };
 		35ECD91B1E84CA1D009E4D9C /* MagiRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ECD91A1E84CA1D009E4D9C /* MagiRefreshComponent.swift */; };
@@ -41,6 +42,7 @@
 		352B23B01E84B88F006EB6B1 /* success@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success@3x.png"; sourceTree = "<group>"; };
 		352B23B81E84BBF8006EB6B1 /* MagiRefreshExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagiRefreshExtension.swift; sourceTree = "<group>"; };
 		352B23BA1E84BDD8006EB6B1 /* MagiRefreshConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagiRefreshConstant.swift; sourceTree = "<group>"; };
+		357C9AFB1E88A95C003CC62B /* scrollView+magi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "scrollView+magi.swift"; sourceTree = "<group>"; };
 		35ECD9161E84C9B0009E4D9C /* MagiHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagiHeader.swift; sourceTree = "<group>"; };
 		35ECD9181E84C9DD009E4D9C /* MagiFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagiFooter.swift; sourceTree = "<group>"; };
 		35ECD91A1E84CA1D009E4D9C /* MagiRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagiRefreshComponent.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				35ECD91A1E84CA1D009E4D9C /* MagiRefreshComponent.swift */,
 				35ECD9161E84C9B0009E4D9C /* MagiHeader.swift */,
 				35ECD9181E84C9DD009E4D9C /* MagiFooter.swift */,
+				357C9AFB1E88A95C003CC62B /* scrollView+magi.swift */,
 			);
 			path = MagiRefresh;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				35ECD9191E84C9DD009E4D9C /* MagiFooter.swift in Sources */,
 				352B238B1E84B310006EB6B1 /* ViewController.swift in Sources */,
 				352B23B91E84BBF8006EB6B1 /* MagiRefreshExtension.swift in Sources */,
+				357C9AFC1E88A95C003CC62B /* scrollView+magi.swift in Sources */,
 				352B23891E84B310006EB6B1 /* AppDelegate.swift in Sources */,
 				352B23BB1E84BDD8006EB6B1 /* MagiRefreshConstant.swift in Sources */,
 				35ECD91B1E84CA1D009E4D9C /* MagiRefreshComponent.swift in Sources */,
