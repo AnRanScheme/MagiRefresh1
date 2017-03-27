@@ -19,8 +19,8 @@ class MagiHeader: UIView {
     
     lazy var indicatorView: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
-        indicator.hidesWhenStopped = false
-        indicator.isHidden = false
+        indicator.hidesWhenStopped = true
+        indicator.isHidden = true
         indicator.color = UIColor.gray
         indicator.sizeToFit()
         indicator.m_size = CGSize(width: 40, height: 40)
@@ -76,7 +76,8 @@ class MagiHeader: UIView {
     }
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        let frame1 = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)
+        super.init(frame: frame1)
         addSubview(imageView)
         addSubview(indicatorView)
         addSubview(descriptionLabel)
@@ -114,7 +115,8 @@ class MagiHeader: UIView {
 
 extension MagiHeader: MagiRefreshComponentDelegate {
     
-    public func refreshComponentDidPrepare(_ refreshComponent: MagiRefreshComponent, refreshComponentType: MagiRefreshComponentType) {
+    public func refreshComponentDidPrepare(_ refreshComponent: MagiRefreshComponent,
+                                           refreshComponentType: MagiRefreshComponentType) {
         if refreshComponentType == .header {
         } else {
             lastTimeLabel.isHidden = true
@@ -124,21 +126,28 @@ extension MagiHeader: MagiRefreshComponentDelegate {
     }
     
     // 开始刷新
-    public func refreshDidBegin(_ refreshComponent: MagiRefreshComponent, refreshComponentType: MagiRefreshComponentType) {
+    public func refreshDidBegin(_ refreshComponent: MagiRefreshComponent,
+                                refreshComponentType: MagiRefreshComponentType) {
         indicatorView.isHidden = false
         indicatorView.startAnimating()
     }
     
     // 刷新完成
-    public func refreshDidEnd(_ refreshComponent: MagiRefreshComponent, refreshComponentType: MagiRefreshComponentType) {
+    public func refreshDidEnd(_ refreshComponent: MagiRefreshComponent,
+                              refreshComponentType: MagiRefreshComponentType) {
          indicatorView.stopAnimating()
     }
     
-    public func refreshDidChangeProgress(_ refreshComponent: MagiRefreshComponent, progress: CGFloat, refreshComponentType: MagiRefreshComponentType) {
+    public func refreshDidChangeProgress(_ refreshComponent: MagiRefreshComponent,
+                                         progress: CGFloat,
+                                         refreshComponentType: MagiRefreshComponentType) {
         
     }
     // 刷新状态发生改变 --- 可以更改提示文字...
-    public func refreshDidChangeState(_ refreshComponent: MagiRefreshComponent, fromState: MagiRefreshState, toState: MagiRefreshState, refreshComponentType: MagiRefreshComponentType) {
+    public func refreshDidChangeState(_ refreshComponent: MagiRefreshComponent,
+                                      fromState: MagiRefreshState,
+                                      toState: MagiRefreshState,
+                                      refreshComponentType: MagiRefreshComponentType) {
 
         setupDescriptionForState(toState, type: refreshComponentType)
         
@@ -146,34 +155,26 @@ extension MagiHeader: MagiRefreshComponentDelegate {
         case .loading:
             imageView.isHidden = true
         case .normal:
-            
             setupLastTime()
             imageView.isHidden = false
             ///恢复
             if refreshComponentType == .header {
                 rotateArrowToDownAnimated(false)
-                
             } else {
                 rotateArrowToUpAnimated(false)
             }
-            
         case .pullToRefresh:
             if refreshComponentType == .header {
-                
                 if fromState == .releaseToFresh {
                     rotateArrowToDownAnimated(true)
                 }
-                
             } else {
-                
                 if fromState == .releaseToFresh {
                     rotateArrowToUpAnimated(true)
                 }
             }
             imageView.isHidden = false
-            
         case .releaseToFresh:
-            
             imageView.isHidden = false
             if refreshComponentType == .header {
                 rotateArrowToUpAnimated(true)

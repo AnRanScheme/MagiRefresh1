@@ -19,7 +19,8 @@ class ARANomalViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ARANomalViewController.cellID)
+        tableView.register(UITableViewCell.self,
+                           forCellReuseIdentifier: ARANomalViewController.cellID)
 
         tableView.tableFooterView = UIView()
         

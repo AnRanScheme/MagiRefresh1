@@ -64,10 +64,12 @@ extension MagiRefreshComponentDelegate {
     public var isAutomaticlyHidden: Bool { return false }
     public var lastRefreshTime: Date? {
         get {
-            return UserDefaults.standard.object(forKey: lastRefreshTimeKey ?? MagiRefreshComponent.ConstantValue.commonRefreshTimeKey) as? Date
+            return UserDefaults.standard.object(forKey: lastRefreshTimeKey
+                ?? MagiRefreshComponent.ConstantValue.commonRefreshTimeKey) as? Date
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: lastRefreshTimeKey ?? MagiRefreshComponent.ConstantValue.commonRefreshTimeKey)
+            UserDefaults.standard.set(newValue, forKey: lastRefreshTimeKey
+                ?? MagiRefreshComponent.ConstantValue.commonRefreshTimeKey)
             UserDefaults.standard.synchronize()
         }
     }
@@ -92,8 +94,7 @@ open class MagiRefreshComponent: UIView {
         static let LastRefreshTimeKey = ProcessInfo().globallyUniqueString
     }
     
-    ///
-    typealias RefreshHandler = (Void) -> Void
+    typealias RefreshHandler = () -> Void
     
     // MARK: - internal property
     var canBegin = false {
@@ -120,10 +121,13 @@ open class MagiRefreshComponent: UIView {
             
             if refreshState != oldValue {
                 if refreshState == .loading {
-                     refreshAnimator.lastRefreshTime = Date()
-                } else {
-                     refreshAnimator.refreshDidChangeState(self, fromState: oldValue, toState: refreshState, refreshComponentType: refreshComponentType)
+                    refreshAnimator.lastRefreshTime = Date()
                 }
+                refreshAnimator.refreshDidChangeState(self,
+                                                      fromState: oldValue,
+                                                      toState: refreshState,
+                                                      refreshComponentType: refreshComponentType)
+
             }
         }
     }
@@ -168,7 +172,6 @@ open class MagiRefreshComponent: UIView {
             /// animator can prepare to do something 调用代理 准备的方法
             self.refreshAnimator.refreshComponentDidPrepare(self,
                                                             refreshComponentType: self.refreshComponentType)
-
             isHidden = refreshAnimator.isAutomaticlyHidden
     }
     
