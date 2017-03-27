@@ -11,45 +11,10 @@ Swift版MJRefresh,但是肯定不是一样的思路都应该一样,另外我使�
         let footer = MagiHeader()
         footer.lastRefreshTimeKey = "asdas"
         addHeader(header: header, footer: footer)
-        
-        func addHeader<Animator: UIView>(header: Animator, footer: Animator) where Animator: MagiRefreshComponentDelegate{
-        tableView.m_addRefreshHeader(headerAnimator: header) { [weak self] in
-            DispatchQueue.global().async {
-                for i in 0...50000 {
-                    if i <= 10 {
-                        self?.data.append(i)
-                    }
-                    //print("加载数据中")
-                }
-                self?.Delay(3, completion: {
-                    self?.tableView.reloadData()
-                    /// 刷新完毕, 停止动画
-                    self?.tableView.m_stopHeaderAnimation()
-                })
-            }
-        }
-        
-        
-        tableView.m_addRefreshFooter(footerAnimator: footer) { [weak self] in
-            DispatchQueue.global().async {
-                for i in 0...50000 {
-                    if i <= 10 {
-                        self?.data.append(i)
-                        
-                    }
-                    /// 延时
-                    print("加载数据中")
-                }
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                    self?.tableView.m_stopFooterAnimation()
-                }
-            }
-        }
-    }
+       
 
 - 自定义样式
-
+![这是列子](https://github.com/AnRanScheme/ARARefresh/raw/master/picture1.gif)
         let normalHeader = MagiHeader()
         normalHeader.lastRefreshTimeKey = "exampleHeader3"
         
@@ -76,3 +41,49 @@ Swift版MJRefresh,但是肯定不是一样的思路都应该一样,另外我使�
         let normalFooter = MagiHeader()
         normalFooter.lastRefreshTimeKey = "exampleFooter3"
         addHeader(header: normalHeader, footer: normalFooter)
+        
+        
+        - 公共调用方法
+        
+        func addHeader<Animator: UIView>(header: Animator, footer: Animator) where Animator: MagiRefreshComponentDelegate{
+        tableView.m_addRefreshHeader(headerAnimator: header) { [weak self] in
+            DispatchQueue.global().async {
+                for i in 0...50000 {
+                    if i <= 10 {
+                        self?.data.append(i)
+                    }
+                    //print("加载数据中")
+                }
+                self?.Delay(3, completion: {
+                    self?.tableView.reloadData()
+                    /// 刷新完毕, 停止动画
+                    self?.tableView.m_stopHeaderAnimation()
+                })
+            }
+        }
+   
+   
+        tableView.m_addRefreshFooter(footerAnimator: footer) { [weak self] in
+            DispatchQueue.global().async {
+                for i in 0...50000 {
+                    if i <= 10 {
+                        self?.data.append(i)
+                        
+                    }
+                    /// 延时
+                    print("加载数据中")
+                }
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.tableView.m_stopFooterAnimation()
+                }
+            }
+        }
+      }
+    
+        func Delay(_ seconds: Double, completion:@escaping ()->()) {
+        let popTime = DispatchTime.now() + Double(Int64( Double(NSEC_PER_SEC) * seconds )) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: popTime) {
+            completion()
+        }
+      }
