@@ -306,7 +306,7 @@ extension MagiHeader: MagiRefreshComponentDelegate {
     fileprivate func rotateArrowToUpAnimated(_ animated: Bool) {
         let time = animated ? 0.2 : 0.0
         UIView.animate(withDuration: time, animations: {
-            self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
+            self.imageView.transform = CGAffineTransform(rotationAngle: .pi)
             
         })
     }
@@ -360,7 +360,6 @@ extension MagiHeader: MagiRefreshComponentDelegate {
                     }
                 case .releaseToFresh:
                     descriptionLabel.text = "松开手刷新"
-                   
                 default: break
                 }
             }
