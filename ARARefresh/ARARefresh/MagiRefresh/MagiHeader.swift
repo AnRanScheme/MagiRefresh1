@@ -360,7 +360,6 @@ extension MagiHeader: MagiRefreshComponentDelegate {
                     }
                 case .releaseToFresh:
                     descriptionLabel.text = "松开手刷新"
-                   
                 default: break
                 }
             }

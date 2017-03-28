@@ -303,7 +303,8 @@ extension MagiRefreshComponent {
                 // refresh end
                 validScrollView.bounces = validSelf.scrollViewOriginalValue.bounces
                 
-                // print("endAnimation ---    \(self!.scrollView?.contentInset.top)")
+                
+                print("endAnimation ---    \(String(describing: self!.scrollView?.contentInset.top))")
                 
                 validSelf.isAnimating = false
                 validSelf.refreshAnimator.refreshDidChangeProgress(validSelf,
