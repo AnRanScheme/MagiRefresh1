@@ -130,7 +130,6 @@ open class MagiRefreshComponent: UIView {
                                                       fromState: oldValue,
                                                       toState: refreshState,
                                                       refreshComponentType: refreshComponentType)
-
             }
         }
     }
@@ -184,10 +183,34 @@ open class MagiRefreshComponent: UIView {
     
     private func addConstraint() {
         guard let refreshAnimatorView = refreshAnimator as? UIView else { return }
-        let leading = NSLayoutConstraint(item: refreshAnimatorView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0)
-        let top = NSLayoutConstraint(item: refreshAnimatorView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0)
-        let trailing = NSLayoutConstraint(item: refreshAnimatorView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-        let bottom = NSLayoutConstraint(item: refreshAnimatorView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        let leading = NSLayoutConstraint(item: refreshAnimatorView,
+                                         attribute: .leading,
+                                         relatedBy: .equal,
+                                         toItem: self,
+                                         attribute: .leading,
+                                         multiplier: 1.0,
+                                         constant: 0.0)
+        let top = NSLayoutConstraint(item: refreshAnimatorView,
+                                     attribute: .top,
+                                     relatedBy: .equal,
+                                     toItem: self,
+                                     attribute: .top,
+                                     multiplier: 1.0,
+                                     constant: 0.0)
+        let trailing = NSLayoutConstraint(item: refreshAnimatorView,
+                                          attribute: .trailing,
+                                          relatedBy: .equal,
+                                          toItem: self,
+                                          attribute: .trailing,
+                                          multiplier: 1.0,
+                                          constant: 0.0)
+        let bottom = NSLayoutConstraint(item: refreshAnimatorView,
+                                        attribute: .bottom,
+                                        relatedBy: .equal,
+                                        toItem: self,
+                                        attribute: .bottom,
+                                        multiplier: 1.0,
+                                        constant: 0.0)
         refreshAnimatorView.translatesAutoresizingMaskIntoConstraints = false
         addConstraints([leading, top, trailing, bottom])
     }
@@ -196,14 +219,14 @@ open class MagiRefreshComponent: UIView {
         super.willMove(toSuperview: newSuperview)
         if newSuperview == nil {
             // 移除kvo监听者
-            removeObserverOf(scrollView)
+            removeObserver(scrollView)
         }
         
         if let newScrollView = newSuperview as? UIScrollView {
             ///  can drag anytime 开启始终支持bounces
             newScrollView.alwaysBounceVertical = true
             // 添加kvo监听者
-            addObserverOf(newScrollView)
+            addObserver(newScrollView)
             // 记录scrollView初始的状态, 便于在执行完成之后恢复
             scrollViewOriginalValue = (newScrollView.bounces,
                                        newScrollView.contentInset.top,
@@ -218,7 +241,7 @@ open class MagiRefreshComponent: UIView {
     }
     
     deinit {
-        removeObserverOf(scrollView)
+        removeObserver(scrollView)
     }
 
 }
@@ -263,10 +286,9 @@ extension MagiRefreshComponent {
         isRefreshing = false
         isAnimating = true
         
-        print("endAnimation ---    \(self.scrollViewOriginalValue.contentInsetTop)")
+        // print("endAnimation ---    \(self.scrollViewOriginalValue.contentInsetTop)")
         
-        DispatchQueue.main.async {
-            [weak self] in
+        DispatchQueue.main.async {[weak self] in
             guard let validSelf = self else { return }
             
             UIView.animate(withDuration: 0.25, animations: {
@@ -281,7 +303,7 @@ extension MagiRefreshComponent {
                 // refresh end
                 validScrollView.bounces = validSelf.scrollViewOriginalValue.bounces
                 
-                print("endAnimation ---    \(self!.scrollView?.contentInset.top)")
+                // print("endAnimation ---    \(self!.scrollView?.contentInset.top)")
                 
                 validSelf.isAnimating = false
                 validSelf.refreshAnimator.refreshDidChangeProgress(validSelf,
@@ -309,7 +331,7 @@ extension MagiRefreshComponent {
                     let newSize = (change?[.newKey] as AnyObject).cgSizeValue,
                     (oldSize != newSize) && (refreshComponentType == .footer)
                     else { return }
-                print("-------\(heightOfContentOnScreenOfScrollView(validScrollView))")
+                // print("-------\(heightOfContentOnScreenOfScrollView(validScrollView))")
                 /// 设置刷新控件self的位置
                 let contentOnScreenHeight = heightOfContentOnScreenOfScrollView(validScrollView)
                 /// 添加在scrollView"外面"
@@ -442,8 +464,7 @@ extension MagiRefreshComponent {
         return scrollView.bounds.height - scrollView.contentInset.top - scrollView.contentInset.bottom
     }
     
-    fileprivate func addObserverOf( _ scrollView: UIScrollView?) {
-        
+    fileprivate func addObserver( _ scrollView: UIScrollView?) {
         scrollView?.addObserver(self,
                                 forKeyPath: ConstantValue.ScrollViewContentOffsetPath,
                                 options: .initial,
@@ -453,11 +474,9 @@ extension MagiRefreshComponent {
                                 forKeyPath: ConstantValue.ScrollViewContentSizePath,
                                 options: [.old, .new],
                                 context: &ConstantValue.RefreshViewContext)
-        
     }
     
-    fileprivate func removeObserverOf( _ scrollView: UIScrollView?) {
-        
+    fileprivate func removeObserver( _ scrollView: UIScrollView?) {
         scrollView?.removeObserver(self,
                                    forKeyPath: ConstantValue.ScrollViewContentOffsetPath,
                                    context: &ConstantValue.RefreshViewContext)
@@ -465,7 +484,6 @@ extension MagiRefreshComponent {
         scrollView?.removeObserver(self,
                                    forKeyPath: ConstantValue.ScrollViewContentSizePath,
                                    context: &ConstantValue.RefreshViewContext)
-        
     }
 
     
