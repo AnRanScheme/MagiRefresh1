@@ -71,22 +71,22 @@ class ARANomalViewController: UITableViewController {
     }
  
     func example1() {
-        let header = MagiHeader()
+        let header                = MagiHeader()
         header.lastRefreshTimeKey = "dsadsa"
-        let footer = MagiHeader()
+        let footer                = MagiHeader()
         footer.lastRefreshTimeKey = "asdas"
-        addHeader(header: header, footer: footer)
+        addHeader(header : header, footer : footer)
     }
     
     func example2() {
-        let normalHeader = MagiHeader()
-        normalHeader.lastRefreshTimeKey = "exampleHeader2"
+        let normalHeader                    = MagiHeader()
+        normalHeader.lastRefreshTimeKey     = "exampleHeader2"
         normalHeader.lastTimeLabel.isHidden = true
         
-        let normalFooter = MagiHeader()
-        normalFooter.lastRefreshTimeKey = "exampleFooter2"
+        let normalFooter                    = MagiHeader()
+        normalFooter.lastRefreshTimeKey     = "exampleFooter2"
         
-        addHeader(header: normalHeader, footer: normalFooter)
+        addHeader(header : normalHeader, footer : normalFooter)
     }
     
     func example3() {
@@ -97,19 +97,19 @@ class ARANomalViewController: UITableViewController {
 
         normalHeader.setupDescriptionForState { (refreshState, refreshType) -> String in
             switch refreshState {
-            case .loading:
+            case .loading        :
                 return "努力加载中"
-            case .normal:
+            case .normal         :
                 return "休息中"
-            case .pullToRefresh:
+            case .pullToRefresh  :
                 if refreshType == .header {
                     return "继续下下下下"
                 } else {
                     return "继续上上上上"
                 }
-            case .releaseToFresh:
+            case .releaseToFresh :
                 return "放开我"
-            default:
+            default              :
                 return ""
             }
         }
